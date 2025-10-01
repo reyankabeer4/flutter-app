@@ -1,3 +1,4 @@
+import 'package:eproject/auth/forgetpassword.dart';
 import 'package:eproject/auth/signup.dart';
 import 'package:eproject/home/home.dart';
 import 'package:eproject/services/firebase_service.dart';
@@ -375,13 +376,19 @@ class _LoginPageState extends State<LoginPage> {
           ),
           TextButton(
             onPressed: () {
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Password reset email sent!'),
-                  backgroundColor: Colors.green,
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ForgotPasswordPage(),
                 ),
               );
+              // Navigator.pop(context);
+              // ScaffoldMessenger.of(context).showSnackBar(
+              //   const SnackBar(
+              //     content: Text('Password reset email sent!'),
+              //     backgroundColor: Colors.green,
+              //   ),
+              // );
             },
             child: const Text('Send'),
           ),
