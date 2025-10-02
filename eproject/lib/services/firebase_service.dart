@@ -26,10 +26,8 @@ class FirebaseService {
   }) async {
     try {
       // Create user with email and password
-      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      UserCredential userCredential = await _auth
+          .createUserWithEmailAndPassword(email: email, password: password);
 
       // Create user document in Firestore
       await _createUserDocument(
@@ -47,22 +45,15 @@ class FirebaseService {
   }
 
   // Sign in with email and password
-  Future<AuthResult> signInWithEmailAndPassword({
+  Future<void> userLogin({
     required String email,
     required String password,
   }) async {
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-
-      return AuthResult.success(userCredential.user!);
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
-      return AuthResult.error(_getAuthErrorMessage(e));
-    } catch (e) {
-      return AuthResult.error('An unexpected error occurred: $e');
-    }
+      throw e.message!;
+    } 
   }
 
   // Sign out
@@ -93,7 +84,7 @@ class FirebaseService {
   }) async {
     try {
       User? user = _auth.currentUser;
-      
+
       if (user == null) {
         return AuthResult.error('No user is currently signed in');
       }
@@ -129,7 +120,7 @@ class FirebaseService {
   }) async {
     try {
       User? user = _auth.currentUser;
-      
+
       if (user == null) {
         return AuthResult.error('No user is currently signed in');
       }
@@ -155,7 +146,7 @@ class FirebaseService {
   Future<AuthResult> deleteAccount(String password) async {
     try {
       User? user = _auth.currentUser;
-      
+
       if (user == null) {
         return AuthResult.error('No user is currently signed in');
       }
@@ -167,10 +158,10 @@ class FirebaseService {
       );
 
       await user.reauthenticateWithCredential(credential);
-      
+
       // Delete user document from Firestore
       await _firestore.collection('users').doc(user.uid).delete();
-      
+
       // Delete user from Firebase Auth
       await user.delete();
 
@@ -185,9 +176,11 @@ class FirebaseService {
   // Get user data from Firestore
   Future<Map<String, dynamic>?> getUserData(String uid) async {
     try {
-      DocumentSnapshot userDoc = 
-          await _firestore.collection('users').doc(uid).get();
-      
+      DocumentSnapshot userDoc = await _firestore
+          .collection('users')
+          .doc(uid)
+          .get();
+
       if (userDoc.exists) {
         return userDoc.data() as Map<String, dynamic>;
       }
@@ -203,7 +196,7 @@ class FirebaseService {
         .collection('users')
         .doc(uid)
         .snapshots()
-        .map((snapshot) => snapshot.data() as Map<String, dynamic>?);
+        .map((snapshot) => snapshot.data());
   }
 
   // Create user document in Firestore
@@ -232,7 +225,7 @@ class FirebaseService {
   Future<AuthResult> sendEmailVerification() async {
     try {
       User? user = _auth.currentUser;
-      
+
       if (user == null) {
         return AuthResult.error('No user is currently signed in');
       }
@@ -288,9 +281,9 @@ class AuthResult {
   final String? message;
   final bool isSuccess;
 
-  AuthResult.success(this.user, {this.message}) 
-      : error = null, isSuccess = true;
+  AuthResult.success(this.user, {this.message})
+    : error = null,
+      isSuccess = true;
 
-  AuthResult.error(this.error) 
-      : user = null, message = null, isSuccess = false;
+  AuthResult.error(this.error) : user = null, message = null, isSuccess = false;
 }

@@ -58,6 +58,7 @@
 //   }
 // }
 
+import 'package:eproject/services/firebase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -70,6 +71,8 @@ class ForgotPasswordPage extends StatefulWidget {
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final TextEditingController _emailController = TextEditingController();
+
+  FirebaseService _firebaseService = FirebaseService();
   bool _isLoading = false;
 
   Future<void> _resetPassword() async {
@@ -83,9 +86,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     setState(() => _isLoading = true);
 
     try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(
-        email: _emailController.text.trim(),
-      );
+      _firebaseService.resetPassword(_emailController.text);
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

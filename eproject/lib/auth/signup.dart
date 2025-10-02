@@ -31,15 +31,7 @@ class _SignUpAppState extends State<SignUpApp> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Back button
-              IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back_ios, size: 20),
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(),
-              ),
 
-              const SizedBox(height: 40),
 
               // Welcome text
               const Text(

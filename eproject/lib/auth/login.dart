@@ -15,6 +15,8 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  FirebaseService _firebaseService = FirebaseService();
+
   bool _obscurePassword = true;
   bool _isLoading = false;
 
@@ -326,8 +328,8 @@ class _LoginPageState extends State<LoginPage> {
       _isLoading = true;
     });
 
-    FirebaseService()
-        .signInWithEmailAndPassword(
+        _firebaseService
+        .userLogin(
           email: _emailController.text,
           password: _passwordController.text,
         )
@@ -364,37 +366,12 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _forgotPassword() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Forgot Password'),
-        content: const Text('Enter your email to reset your password'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.push(
+   Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const ForgotPasswordPage(),
                 ),
               );
-              // Navigator.pop(context);
-              // ScaffoldMessenger.of(context).showSnackBar(
-              //   const SnackBar(
-              //     content: Text('Password reset email sent!'),
-              //     backgroundColor: Colors.green,
-              //   ),
-              // );
-            },
-            child: const Text('Send'),
-          ),
-        ],
-      ),
-    );
   }
 
   void _navigateToSignUp() {
