@@ -1,9 +1,16 @@
+import 'package:eproject/auth/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+// import 'package:eproject/services/firebase_service.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
@@ -21,7 +28,9 @@ class ProfilePage extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 40,
-              backgroundImage: AssetImage("assets/images/channels4_profile.jpg"),
+              backgroundImage: AssetImage(
+                "assets/images/channels4_profile.jpg",
+              ),
             ),
             const SizedBox(height: 15),
             Text(
@@ -39,7 +48,17 @@ class ProfilePage extends StatelessWidget {
               ),
               onPressed: () async {
                 await FirebaseAuth.instance.signOut();
-                Navigator.pushReplacementNamed(context, '/login');
+
+                if (!mounted)
+                  return; // async ke baad context safe karne ke liye
+
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                  (Route<dynamic> route) =>
+                      false, // sari purani routes hata dega
+                );
+                // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>LoginPage()));
               },
               icon: const Icon(Icons.logout),
               label: const Text("Logout"),
