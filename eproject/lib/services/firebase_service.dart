@@ -203,7 +203,7 @@ class FirebaseService {
         .collection('users')
         .doc(uid)
         .snapshots()
-        .map((snapshot) => snapshot.data() as Map<String, dynamic>?);
+        .map((snapshot) => snapshot.data());
   }
 
   // Create user document in Firestore
