@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart'; // ✅ Import Google Fonts
-import 'package:eproject/auth/login.dart'; // ✅ Import your LoginPage
+// ✅ Import your LoginPage
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

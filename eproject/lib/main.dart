@@ -39,6 +39,35 @@ class AuthGate extends StatelessWidget {
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
+        // 🔹 If user not logged in → show SignIn
+        if (!snapshot.hasData) {
+          return const SignUpApp(); // your sign-in screen
+        }
+
+        // 🔹 If user is logged in → check Firestore role
+        // final user = snapshot.data!;
+        // return FutureBuilder<DocumentSnapshot>(
+        //   future: FirebaseFirestore.instance
+        //       .collection('users')
+        //       .doc(user.uid)
+        //       .get(),
+        //   builder: (context, userSnapshot) {
+        //     if (!userSnapshot.hasData) {
+        //       return const Center(child: CircularProgressIndicator());
+        //     }
+
+        //     final userData = userSnapshot.data!;
+        //     final isAdmin = userData['admin'] == true;
+
+        //     // 🔹 Redirect based on role
+        //     if (isAdmin) {
+        //       return const Admindashboard();
+        //     } else {
+        //       return const Home();
+        //     }
+        //   },
+        // );
+
         if (snapshot.hasData) {
           return Home();
         } else {

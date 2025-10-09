@@ -1,76 +1,5 @@
-// import 'package:eproject/auth/login.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:flutter/material.dart';
-// // import 'package:eproject/services/firebase_service.dart';
-
-// class ProfilePage extends StatefulWidget {
-//   const ProfilePage({super.key});
-
-//   @override
-//   State<ProfilePage> createState() => _ProfilePageState();
-// }
-
-// class _ProfilePageState extends State<ProfilePage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     User? user = FirebaseAuth.instance.currentUser;
-//     String? userName = user?.displayName ?? user?.email ?? "Guest";
-
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text("Profile"),
-//         automaticallyImplyLeading: false, // remove back arrow
-//       ),
-//       body: Padding(
-//         padding: const EdgeInsets.all(20.0),
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             CircleAvatar(
-//               radius: 40,
-//               backgroundImage: AssetImage(
-//                 "assets/images/channels4_profile.jpg",
-//               ),
-//             ),
-//             const SizedBox(height: 15),
-//             Text(
-//               userName,
-//               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-//             ),
-//             const SizedBox(height: 40),
-
-//             // Logout button
-//             ElevatedButton.icon(
-//               style: ElevatedButton.styleFrom(
-//                 backgroundColor: Colors.red,
-//                 foregroundColor: Colors.white,
-//                 minimumSize: Size(double.infinity, 50),
-//               ),
-//               onPressed: () async {
-//                 await FirebaseAuth.instance.signOut();
-
-//                 if (!mounted)
-//                   return; // async ke baad context safe karne ke liye
-
-//                 Navigator.pushAndRemoveUntil(
-//                   context,
-//                   MaterialPageRoute(builder: (context) => const LoginPage()),
-//                   (Route<dynamic> route) =>
-//                       false, // sari purani routes hata dega
-//                 );
-//                 // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>LoginPage()));
-//               },
-//               icon: const Icon(Icons.logout),
-//               label: const Text("Logout"),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:eproject/auth/login.dart';
+import 'package:eproject/home/edit_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -85,18 +14,25 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
-    String? userName = user?.displayName ?? "reyan";
-    String? phoneNumber = user?.phoneNumber ?? "+123456789";
+    String? userName = user?.displayName ?? user?.email ?? "no name";
+    String? phoneNumber = user?.phoneNumber ?? "+9200000000";
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Profile"),
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.black,
+        backgroundColor: const Color(0xff0d2b3c),
+        //
+        title: const Text(
+          "Profile",
+          textAlign: TextAlign.start,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+
+            color: Colors.white,
+          ),
+        ),
       ),
+
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -107,7 +43,7 @@ class _ProfilePageState extends State<ProfilePage> {
               width: double.infinity,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.grey[100],
+                // color: Colors.grey[100],
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
@@ -193,27 +129,31 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             _buildMenuItem(
               icon: Icons.person_outline,
-              title: "My Profile",
+              title: "Edit Profile",
               onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EditProfile()),
+                );
                 // Navigate to My Profile
               },
             ),
             _buildDivider(),
-            _buildMenuItem(
-              icon: Icons.shopping_bag_outlined,
-              title: "My Orders",
-              onTap: () {
-                // Navigate to My Orders
-              },
-            ),
+            // _buildMenuItem(
+            //   icon: Icons.shopping_bag_outlined,
+            //   title: "My Orders",
+            //   onTap: () {
+            //     // Navigate to My Orders
+            //   },
+            // ),
             _buildDivider(),
-            _buildMenuItem(
-              icon: Icons.currency_exchange_outlined,
-              title: "Refund",
-              onTap: () {
-                // Navigate to Refund
-              },
-            ),
+            // _buildMenuItem(
+            //   icon: Icons.currency_exchange_outlined,
+            //   title: "Refund",
+            //   onTap: () {
+            //     // Navigate to Refund
+            //   },
+            // ),
             _buildDivider(),
             _buildMenuItem(
               icon: Icons.lock_outline,
