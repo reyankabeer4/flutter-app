@@ -1,3 +1,4 @@
+import 'package:eproject/Admin/dashboard.dart';
 import 'package:eproject/auth/forgetpassword.dart';
 import 'package:eproject/auth/signup.dart';
 import 'package:eproject/home/home.dart';
@@ -19,6 +20,9 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _obscurePassword = true;
   bool _isLoading = false;
+
+  String adminEmail = "admin@app.com";
+  String adminPassword = "admin123";
 
   @override
   Widget build(BuildContext context) {
@@ -328,7 +332,10 @@ class _LoginPageState extends State<LoginPage> {
       _isLoading = true;
     });
 
-        _firebaseService
+    if (_emailController.text == adminEmail && _passwordController.text == adminPassword) {
+      Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context) => Dashboard(),),  (route)=>false );
+    } else {
+      _firebaseService
         .userLogin(
           email: _emailController.text,
           password: _passwordController.text,
@@ -354,6 +361,7 @@ class _LoginPageState extends State<LoginPage> {
             context,
           ).showSnackBar(SnackBar(content: Text(error.toString())));
         });
+    }
   }
 
   void _socialLogin(String platform) {
@@ -366,12 +374,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _forgotPassword() {
-   Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ForgotPasswordPage(),
-                ),
-              );
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const ForgotPasswordPage()),
+    );
   }
 
   void _navigateToSignUp() {
