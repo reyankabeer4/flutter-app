@@ -332,35 +332,40 @@ class _LoginPageState extends State<LoginPage> {
       _isLoading = true;
     });
 
-    if (_emailController.text == adminEmail && _passwordController.text == adminPassword) {
-      Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context) => Dashboard(),),  (route)=>false );
+    if (_emailController.text == adminEmail &&
+        _passwordController.text == adminPassword) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => AdminDashboard()),
+        (route) => false,
+      );
     } else {
       _firebaseService
-        .userLogin(
-          email: _emailController.text,
-          password: _passwordController.text,
-        )
-        .then((value) {
-          setState(() {
-            _isLoading = false;
+          .userLogin(
+            email: _emailController.text,
+            password: _passwordController.text,
+          )
+          .then((value) {
+            setState(() {
+              _isLoading = false;
+            });
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text("Success")));
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => Home()),
+              (route) => false,
+            );
+          })
+          .catchError((error) {
+            setState(() {
+              _isLoading = false;
+            });
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(error.toString())));
           });
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text("Success")));
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => Home()),
-            (route) => false,
-          );
-        })
-        .catchError((error) {
-          setState(() {
-            _isLoading = false;
-          });
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(error.toString())));
-        });
     }
   }
 
