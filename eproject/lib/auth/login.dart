@@ -36,7 +36,10 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               // Back button
               IconButton(
-                onPressed: () => Navigator.pop(context),
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignUpApp()),
+                ),
                 icon: const Icon(Icons.arrow_back_ios, size: 20),
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),

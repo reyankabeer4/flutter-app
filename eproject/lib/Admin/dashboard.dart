@@ -1,18 +1,8 @@
-// import 'package:flutter/material.dart';
-
-// class Dashboard extends StatelessWidget {
-//   const Dashboard({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text("Admin Dashboard"),
-//       ),
-//     );
-//   }
-// }
-
+import 'package:eproject/Admin/order_list.dart';
+import 'package:eproject/Admin/users_details.dart';
+import 'package:eproject/auth/login.dart';
+import 'package:eproject/services/firebase_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
@@ -23,25 +13,91 @@ class AdminDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F6FA),
+
+      // appBar: AppBar(
+      //   leading: IconButton(
+      //     onPressed: () async {
+      //       await FirebaseAuth.instance.signOut();
+
+      //       // if (!mounted) return;
+
+      //       Navigator.pushAndRemoveUntil(
+      //         context,
+      //         MaterialPageRoute(builder: (context) => const LoginPage()),
+      //         (Route<dynamic> route) => false,
+      //       );
+      //     },
+      //     icon: Icon(Icons.logout),
+      //   ),
+      //   elevation: 0,
+      //   backgroundColor: Colors.transparent,
+      //   title: const Text(
+      //     "Admin Dashboard",
+      //     style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+      //   ),
+      //   centerTitle: true,
+      // ),
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
         title: const Text(
           "Admin Dashboard",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        leading: IconButton(
+          onPressed: () async {
+            await FirebaseAuth.instance.signOut();
+
+            // if (!mounted) return;
+
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginPage()),
+              (Route<dynamic> route) => false,
+            );
+          },
+          icon: Icon(Icons.logout),
         ),
         centerTitle: true,
+        backgroundColor: const Color(0xff0d2b3c),
+        foregroundColor: Colors.white,
+        elevation: 3,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
+
         child: Column(
           children: [
+            Row(
+              children: [
+                Padding(padding: const EdgeInsets.all(0.0)),
+                Text("Hello Reyan !", style: TextStyle(fontSize: 25)),
+              ],
+            ),
             // Overview Cards
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildStatCard("Users", "120", LucideIcons.user),
-                _buildStatCard("Orders", "89", LucideIcons.shoppingBag),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => UserListPage()),
+                    );
+                  },
+                  child: _buildStatCard("Users", "120", LucideIcons.user),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => OrderList()),
+                    );
+                  },
+                  child: _buildStatCard(
+                    "Orders",
+                    "89",
+                    LucideIcons.shoppingBag,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 16),
@@ -91,6 +147,15 @@ class AdminDashboard extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: const Color(0xFF7B61FF),
         unselectedItemColor: Colors.grey,
+        onTap: (index) {
+          if (index == 1) {
+            // Navigate to user list page
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const UserListPage()),
+            );
+          }
+        },
         items: const [
           BottomNavigationBarItem(icon: Icon(LucideIcons.home), label: "Home"),
           BottomNavigationBarItem(
@@ -103,6 +168,22 @@ class AdminDashboard extends StatelessWidget {
           ),
         ],
       ),
+
+      // bottomNavigationBar: BottomNavigationBar(
+      //   selectedItemColor: const Color(0xFF7B61FF),
+      //   unselectedItemColor: Colors.grey,
+      //   items: const [
+      //     BottomNavigationBarItem(icon: Icon(LucideIcons.home), label: "Home"),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(LucideIcons.users),
+      //       label: "Users",
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(LucideIcons.settings),
+      //       label: "Settings",
+      //     ),
+      //   ],
+      // ),
     );
   }
 

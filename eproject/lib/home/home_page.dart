@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart'; // ✅ Import Google Fonts
-// ✅ Import your LoginPage
+import 'package:google_fonts/google_fonts.dart'; 
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -11,7 +10,6 @@ class HomePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // 🔹 Top Bar
             Padding(
               padding: const EdgeInsets.all(20),
               child: Row(

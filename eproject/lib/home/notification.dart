@@ -60,26 +60,27 @@ class _NotificationPageState extends State<NotificationPage>
           ),
         ),
         centerTitle: true,
-        bottom: TabBar(
-          controller: _tabController,
-          indicatorColor: Colors.white,
-          labelColor: Colors.white,
-          unselectedLabelColor: Colors.white70,
-          tabs: const [
-            Tab(text: "Today"),
-            Tab(text: "This Week"),
-            Tab(text: "Earlier"),
-          ],
-        ),
+        //   bottom: TabBar(
+        //     controller: _tabController,
+        //     indicatorColor: Colors.white,
+        //     labelColor: Colors.white,
+        //     unselectedLabelColor: Colors.white70,
+        //     tabs: const [
+        //       Tab(text: "Today"),
+        //       Tab(text: "This Week"),
+        //       Tab(text: "Earlier"),
+        //     ],
+        //   ),
+        // ),
+        // body: TabBarView(
+        //   controller: _tabController,
+        //   children: [
+        //     buildNotificationList(todayNotifications),
+        //     buildNotificationList(weekNotifications),
+        //     buildNotificationList(earlierNotifications),
+        //   ],
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          buildNotificationList(todayNotifications),
-          buildNotificationList(weekNotifications),
-          buildNotificationList(earlierNotifications),
-        ],
-      ),
+      body: buildNotificationList(todayNotifications),
     );
   }
 
