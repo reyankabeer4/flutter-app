@@ -51,7 +51,7 @@ class _NotificationPageState extends State<NotificationPage>
         // elevation: 0,
         title: const Text(
           "Notification",
-          textAlign: TextAlign.start,
+          // textAlign: TextAlign.start,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
@@ -59,26 +59,6 @@ class _NotificationPageState extends State<NotificationPage>
             color: Colors.white,
           ),
         ),
-        centerTitle: true,
-        //   bottom: TabBar(
-        //     controller: _tabController,
-        //     indicatorColor: Colors.white,
-        //     labelColor: Colors.white,
-        //     unselectedLabelColor: Colors.white70,
-        //     tabs: const [
-        //       Tab(text: "Today"),
-        //       Tab(text: "This Week"),
-        //       Tab(text: "Earlier"),
-        //     ],
-        //   ),
-        // ),
-        // body: TabBarView(
-        //   controller: _tabController,
-        //   children: [
-        //     buildNotificationList(todayNotifications),
-        //     buildNotificationList(weekNotifications),
-        //     buildNotificationList(earlierNotifications),
-        //   ],
       ),
       body: buildNotificationList(todayNotifications),
     );

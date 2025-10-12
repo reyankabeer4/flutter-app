@@ -31,8 +31,6 @@ class _SignUpAppState extends State<SignUpApp> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
-
               // Welcome text
               const Text(
                 'Create Account',
@@ -100,7 +98,7 @@ class _SignUpAppState extends State<SignUpApp> {
                 child: ElevatedButton(
                   onPressed: _isLoading ? null : _signUp,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Color(0xff0d2b3c),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -142,7 +140,7 @@ class _SignUpAppState extends State<SignUpApp> {
                         TextSpan(
                           text: 'Log In',
                           style: TextStyle(
-                            color: Colors.blue,
+                            color: Color(0xff0d2b3c),
                             fontWeight: FontWeight.w600,
                           ),
                         ),

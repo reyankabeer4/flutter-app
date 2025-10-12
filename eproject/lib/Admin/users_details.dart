@@ -50,11 +50,13 @@ class UserListPage extends StatelessWidget {
                   child: Text(
                     (data['name']?.substring(0, 1) ?? '?').toUpperCase(),
                     style: const TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.blue),
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
                   ),
                 ),
                 title: Text(
-                  data['name'] ?? 'No Name',
+                  data['fullName'] ?? 'No Name',
                   style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
                 subtitle: Text(data['email'] ?? 'No Email'),

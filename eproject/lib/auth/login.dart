@@ -89,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: const Text(
                     'Forgot Password?',
                     style: TextStyle(
-                      color: Colors.blue,
+                      color: Color(0xff0d2b3c),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -105,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: ElevatedButton(
                   onPressed: _isLoading ? null : _login,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Color(0xff0d2b3c),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -180,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                         TextSpan(
                           text: 'Sign Up',
                           style: TextStyle(
-                            color: Colors.blue,
+                            color: Color(0xff0d2b3c),
                             fontWeight: FontWeight.w600,
                           ),
                         ),

@@ -1,3 +1,4 @@
+import 'package:eproject/Admin/adminProductScreen.dart';
 import 'package:eproject/Admin/order_list.dart';
 import 'package:eproject/Admin/users_details.dart';
 import 'package:eproject/auth/login.dart';
@@ -106,6 +107,22 @@ class AdminDashboard extends StatelessWidget {
               children: [
                 _buildStatCard("Revenue", "\$1,240", LucideIcons.dollarSign),
                 _buildStatCard("Reports", "5", LucideIcons.barChart),
+              ],
+            ),
+            SizedBox(height: 16),
+            Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AdminProductScreen(),
+                      ),
+                    );
+                  },
+                  child: _buildStatCard("Product", "120", LucideIcons.user),
+                ),
               ],
             ),
 

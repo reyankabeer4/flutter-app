@@ -14,8 +14,9 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
-    String? userName = user?.displayName ?? user?.email ?? "no name";
-    String? phoneNumber = user?.phoneNumber ?? "+9200000000";
+    // String? fullName = user?.fullName ?? "no name";
+    // String? email = user?.email ?? "no email";
+    // String? phone= user?.phone ?? "+9200000000";
 
     return Scaffold(
       appBar: AppBar(
@@ -38,12 +39,10 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Profile Header Section
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                // color: Colors.grey[100],
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
@@ -59,16 +58,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   const SizedBox(height: 15),
                   Text(
-                    userName,
+                    "Test",
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    phoneNumber,
-                    style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                   ),
                 ],
               ),
