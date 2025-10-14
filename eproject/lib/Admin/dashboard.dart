@@ -183,24 +183,12 @@ class AdminDashboard extends StatelessWidget {
             icon: Icon(LucideIcons.settings),
             label: "Settings",
           ),
+          BottomNavigationBarItem(
+            icon: Icon(LucideIcons.personStanding),
+            label: "Profile",
+          ),
         ],
       ),
-
-      // bottomNavigationBar: BottomNavigationBar(
-      //   selectedItemColor: const Color(0xFF7B61FF),
-      //   unselectedItemColor: Colors.grey,
-      //   items: const [
-      //     BottomNavigationBarItem(icon: Icon(LucideIcons.home), label: "Home"),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(LucideIcons.users),
-      //       label: "Users",
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(LucideIcons.settings),
-      //       label: "Settings",
-      //     ),
-      //   ],
-      // ),
     );
   }
 
